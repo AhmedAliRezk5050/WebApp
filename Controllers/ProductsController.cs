@@ -21,11 +21,11 @@ namespace WebApp.Controllers
         }
 
         [HttpGet("{id}")]
-        public Product? GetProduct([FromServices] ILogger<ProductsController> logger)
+        public Product? GetProduct(long id, [FromServices] ILogger<ProductsController> logger)
         {
             logger.LogDebug("GetProduct Action Invoked");
 
-            return context.Products.FirstOrDefault();
+            return context.Products.Find(id);
         }
     }
 }
