@@ -25,7 +25,7 @@ namespace WebApp.Controllers
         {
             Product? product = await context.Products.FindAsync(id);
 
-            if(product == null)
+            if (product == null)
             {
                 return NotFound();
             }
@@ -65,7 +65,12 @@ namespace WebApp.Controllers
         [HttpGet("redirect")]
         public IActionResult Redirect()
         {
-            return RedirectToAction(nameof(GetProduct), new { Id = 1 });
+            return RedirectToRoute(new
+            {
+                controller = "Products",
+                action = "GetProduct",
+                Id = 1
+            });
         }
     }
 }
