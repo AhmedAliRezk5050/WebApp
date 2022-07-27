@@ -65,7 +65,7 @@ namespace WebApp.Controllers
         [HttpGet("redirect")]
         public IActionResult Redirect()
         {
-            return Redirect("/api/products/1");
+            return RedirectToAction(nameof(GetProduct), new { Id = 1 });
         }
     }
 }
