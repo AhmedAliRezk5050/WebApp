@@ -18,7 +18,6 @@ namespace WebApp.Models
 
         public long SupplierId { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Supplier? Supplier { get; set; }
     }
 }
