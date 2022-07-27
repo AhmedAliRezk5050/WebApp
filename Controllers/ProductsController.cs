@@ -61,5 +61,11 @@ namespace WebApp.Controllers
 
             await context.SaveChangesAsync();
         }
+
+        [HttpGet("redirect")]
+        public IActionResult Redirect()
+        {
+            return Redirect("/api/products/1");
+        }
     }
 }
