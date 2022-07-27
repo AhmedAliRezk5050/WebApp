@@ -10,7 +10,12 @@ builder.Services.AddDbContext<DataContext>(opts =>
     opts.EnableSensitiveDataLogging(true);
 });
 
+
 var app = builder.Build();
+
+app.UseStaticFiles();
+
+app.UseMiddleware<WebApp.TestMiddleware>();
 
 app.MapGet("/", () => "Hello World!");
 
