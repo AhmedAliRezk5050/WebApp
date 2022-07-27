@@ -31,8 +31,14 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            return Ok(product);
-
+            return Ok(new
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                SupplierId = product.SupplierId
+            });
         }
 
         [HttpPost]
