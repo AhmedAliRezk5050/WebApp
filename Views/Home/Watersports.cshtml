@@ -10,7 +10,15 @@
     <div class="m-2">
         <table class="table table-sm table-striped table-bordered" data-id="@Model?.ProductId">
             <tbody>
-                <tr><th>Name</th><td>@Model?.Name</td></tr>
+                @if (Model?.Price > 200)
+                {
+                    <tr><th>Name</th><td>Luxury @Model?.Name</td></tr>
+                }
+                else
+                {
+                    <tr><th>Name</th><td>Basic @Model?.Name</td></tr>
+                }
+
                 <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
                 <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
                 <tr><th>Supplier ID</th><td>@Model?.SupplierId</td></tr>
