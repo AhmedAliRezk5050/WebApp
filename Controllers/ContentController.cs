@@ -18,8 +18,9 @@ namespace WebApp.Controllers
         [HttpGet("string")]
         public string GetString() => "This is a string response";
 
-        [HttpGet("object")]
-        [Produces("application/json")]
+        [HttpGet("object/{format?}")]
+        [FormatFilter]
+        [Produces("application/json", "application/xml")]
         public async Task<ProductBindingTarget> GetObject()
         {
             Product p = await context.Products.FirstAsync();
