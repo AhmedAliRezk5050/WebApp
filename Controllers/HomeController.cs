@@ -16,13 +16,19 @@ namespace WebApp.Controllers
         {
             Product? product = await context.Products.FindAsync(id);
 
-            if(product?.CategoryId == 1)
+            if (product?.CategoryId == 1)
             {
                 return View("Watersports", product);
-            } else
+            }
+            else
             {
                 return View(product);
             }
+        }
+
+        public IActionResult Common()
+        {
+            return View();
         }
     }
 }
