@@ -10,13 +10,17 @@
     <div class="m-2">
         <table class="table table-sm table-striped table-bordered" data-id="@Model?.ProductId">
             <tbody>
-                @if (Model?.Price > 200)
+                @switch(Model?.Name)
                 {
-                    <tr><th>Name</th><td>Luxury @Model?.Name</td></tr>
-                }
-                else
-                {
-                    <tr><th>Name</th><td>Basic @Model?.Name</td></tr>
+                    case "Kayak":
+                        <tr><th>Name</th><td>Small Boat</td></tr>
+                        break;
+                    case "Lifejacket":
+                        <tr><th>Name</th><td>Flotation Aid</td></tr>
+                        break;
+                    default:
+                        <tr><th>Name</th><td>@Model?.Name</td></tr>
+                        break;
                 }
 
                 <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
