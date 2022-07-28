@@ -14,6 +14,8 @@
                 <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
                 <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
                 <tr><th>Supplier ID</th><td>@Model?.SupplierId</td></tr>
+                <tr><th>Tax</th><td>@Model?.Price * 0.2m</td></tr>
+                <tr><th>Tax</th><td>@(Model?.Price * 0.2m)</td></tr>
             </tbody>
         </table>
     </div>
