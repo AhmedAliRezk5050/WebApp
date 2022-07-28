@@ -10,19 +10,23 @@
     <div class="m-2">
         <table class="table table-sm table-striped table-bordered" data-id="@Model?.ProductId">
             <tbody>
-                @switch(Model?.Name)
-                {
-                    case "Kayak":
-                        <tr><th>Name</th><td>Small Boat</td></tr>
-                        break;
-                    case "Lifejacket":
-                        <tr><th>Name</th><td>Flotation Aid</td></tr>
-                        break;
-                    default:
-                        <tr><th>Name</th><td>@Model?.Name</td></tr>
-                        break;
-                }
-
+                <tr>
+                    <th>Name</th>
+                    <td>
+                        @switch (Model?.Name)
+                        {
+                            case "Kayak":
+                                @:Small Boat
+                                break;
+                            case "Lifejacket":
+                                @:Flotation Aid
+                                break;
+                            default:
+                                @Model?.Name
+                                break;
+                        }
+                </td>
+                </tr>
                 <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
                 <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
                 <tr><th>Supplier ID</th><td>@Model?.SupplierId</td></tr>
