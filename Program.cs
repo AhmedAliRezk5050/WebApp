@@ -10,7 +10,9 @@ builder.Services.AddDbContext<DataContext>(opts => {
     opts.EnableSensitiveDataLogging(true);
 });
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers()
+                .AddNewtonsoftJson()
+                .AddXmlDataContractSerializerFormatters();
 
 builder.Services.Configure<MvcNewtonsoftJsonOptions>(opts => {
     opts.SerializerSettings.NullValueHandling
