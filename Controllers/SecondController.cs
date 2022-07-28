@@ -6,7 +6,7 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
-            return View("Common");
+            return View("/Views/Shared/Common.cshtml");
         }
     }
 } 
