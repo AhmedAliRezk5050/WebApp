@@ -12,6 +12,8 @@ builder.Services.AddDbContext<DataContext>(opts =>
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddRazorPages();
+
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
@@ -28,6 +30,8 @@ app.UseSession();
 app.MapControllers();
 
 app.MapDefaultControllerRoute();
+
+app.MapRazorPages();
 
 var context = app.Services.CreateScope()
                           .ServiceProvider
