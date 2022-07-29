@@ -5,7 +5,9 @@
     ViewBag.Title = ViewBag.Title ?? "Product Table";
 }
 
-@section Header { Product Information }
+@section Header {
+ Product Information
+ }
     <tr>
         <th>Name</th>
         <td>@Model?.Name</td>
@@ -21,4 +23,10 @@
 
     @section Footer {
     @(((Model?.Price / ViewBag.AveragePrice)* 100).ToString("F2"))% of average price
+}
+
+    @section Summary {
+    <div class="bg-info text-white m-2 p-2">
+        @Json.Serialize(Model)
+    </div>
 }
