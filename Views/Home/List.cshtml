@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<Product>
 @{
     Layout = null;
+
     decimal average = Model?.Average(p => p.Price) ?? 0;
+
+    Func<Product, object> row
+                = @<tr><td>@item.Name</td><td>@item.Price</td></tr>;
 }
 
+
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +28,7 @@
             <tbody>
                 @foreach (Product p in Model ?? Enumerable.Empty<Product>())
                 {
-                    <partial name="_RowPartial" model="p" />
+                    @row(p)
                 }
             </tbody>
         </table>
