@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     <th class="bg-primary text-white text-center" colspan="2">
-                        @RenderSection("Header")
+                        @RenderSection("Header", false)
                     </th>
                 </tr>
             </thead>
@@ -20,11 +20,12 @@
             <tfoot>
                 <tr>
                     <th class="bg-primary text-white text-center" colspan="2">
-                        @RenderSection("Footer")
+                        @RenderSection("Footer", false)
                     </th>
                 </tr>
             </tfoot>
         </table>
     </div>
+    @RenderSection("Summary", false)
 </body>
 </html>

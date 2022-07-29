@@ -21,8 +21,7 @@ namespace WebApp.Controllers
 
             if (product?.CategoryId == 1)
             {
-                //return View("Watersports", product);
-                return View(product);
+                return View("Watersports", product);
             }
             else
             {
