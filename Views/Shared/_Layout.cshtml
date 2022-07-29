@@ -26,6 +26,15 @@
             </tfoot>
         </table>
     </div>
-    @RenderSection("Summary", false)
+    @if (IsSectionDefined("Summary"))
+    {
+        @RenderSection("Summary", false)
+    }
+    else
+    {
+        <div class="bg-info text-center text-white m-2 p-2">
+            This is the default summary
+        </div>
+    }
 </body>
 </html>
