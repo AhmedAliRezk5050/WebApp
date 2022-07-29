@@ -4,6 +4,12 @@ namespace WebApp.Controllers
 {
     public class CubedController : Controller
     {
+        [TempData]
+        public string? Value { get; set; }
+
+        [TempData]
+        public string? Result { get; set; }
+
         public IActionResult Index()
         {
             return View("Cubed");
@@ -11,9 +17,9 @@ namespace WebApp.Controllers
 
         public IActionResult Cube(double num)
         {
-            TempData["value"] = num.ToString();
+            Value = num.ToString();
 
-            TempData["result"] = Math.Pow(num, 3).ToString();
+            Result = Math.Pow(num, 3).ToString();
 
             return RedirectToAction(nameof(Index));
         }
