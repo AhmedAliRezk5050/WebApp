@@ -9,7 +9,14 @@
         <table class="table table-sm table-striped table-bordered">
             <tbody>
                 <tr><th>Name</th><td>@Model?.Name</td></tr>
-                <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
+                <tr>
+                    <th>Price</th>
+                    <td>
+                        @Model?.Price.ToString("c")
+                        (@(((Model?.Price / ViewBag.AveragePrice)
+                        * 100).ToString("F2"))% of average price)
+                    </td>
+                </tr>
                 <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
             </tbody>
         </table>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -14,6 +15,8 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index(long id = 1)
         {
+            ViewBag.AveragePrice = await context.Products.AverageAsync(p => p.Price);
+
             Product? product = await context.Products.FindAsync(id);
 
             if (product?.CategoryId == 1)

@@ -12,9 +12,18 @@ builder.Services.AddDbContext<DataContext>(opts =>
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.MapControllers();
 
@@ -26,4 +35,4 @@ var context = app.Services.CreateScope()
 
 SeedData.SeedDatabase(context);
 
-app.Run();
+app.Run(); 
