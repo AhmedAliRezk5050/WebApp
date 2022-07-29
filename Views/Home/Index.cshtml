@@ -1,7 +1,7 @@
 ﻿@model Product
 
 @{
-    Layout = "_ImportantLayout";
+    Layout = Model?.Price > 100 ? "_ImportantLayout" : "_Layout";
     ViewBag.Title = ViewBag.Title ?? "Product Table";
 } 
 
@@ -11,7 +11,7 @@
             <tr><th>Name</th><td>@Model?.Name</td></tr>
             <tr>
                 <th>Price</th>
-               
+                <td>@Model?.Price.ToString("c1")</td>
             </tr>
             <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
         </tbody>
