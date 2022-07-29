@@ -14,19 +14,16 @@
     <div class="m-2">
         <table class="table table-sm table-striped table-bordered">
             <thead>
-                <tr><th>Name</th><th>Price</th></tr>
-                @foreach (Product product in Model ?? Enumerable.Empty<Product>())
-                {
-                    <tr>
-                        <td>@product.Name</td>
-                        <td>@product.Price</td>
-                        <td>
-                            @((product.Price / average * 100).ToString("F1")) % of average
-                        </td>
-                    </tr>
-                }
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
             </thead>
             <tbody>
+                @foreach (Product p in Model ?? Enumerable.Empty<Product>())
+                {
+                    <partial name="_RowPartial" model="p" />
+                }
             </tbody>
         </table>
     </div>

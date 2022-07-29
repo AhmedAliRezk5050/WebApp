@@ -33,6 +33,7 @@ var context = app.Services.CreateScope()
                           .ServiceProvider
                           .GetRequiredService<DataContext>();
 
-SeedData.SeedDatabase(context);
+// temporary disable
+//SeedData.SeedDatabase(context);
 
 app.Run(); 
