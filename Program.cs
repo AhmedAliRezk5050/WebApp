@@ -31,12 +31,12 @@ app.MapControllers();
 
 app.MapDefaultControllerRoute();
 
-app.MapRazorPages();
+app.MapRazorPages().Add(b => ((RouteEndpointBuilder)b).Order = 2); ;
 
 var context = app.Services.CreateScope()
                           .ServiceProvider
                           .GetRequiredService<DataContext>();
-
+ 
 // temporary disable
 //SeedData.SeedDatabase(context);
 
