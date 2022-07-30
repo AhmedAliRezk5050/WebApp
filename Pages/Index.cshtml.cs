@@ -19,6 +19,12 @@ namespace WebApp.Pages
         {
             Product = await context.Products.FindAsync(id);
 
+            if (Product == null)
+            {
+                //return RedirectToPage("NotFound");
+                return Redirect("/noId");
+            }
+
             return Page();
         }
     }
