@@ -27,6 +27,6 @@
 
     @section Summary {
     <div class="bg-info text-white m-2 p-2">
-        <vc:city-summary theme-name="secondary"/>
+        @await Component.InvokeAsync("CitySummary", new {themeName="success"})
     </div>
 }
