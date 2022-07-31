@@ -14,7 +14,7 @@ namespace WebApp.Components
             data = cdata;
         }
 
-        public IViewComponentResult Invoke(string themeName)
+        public IViewComponentResult Invoke(string themeName = "danger")
         {
             ViewBag.Theme = themeName;
             return View(new CityViewModel
