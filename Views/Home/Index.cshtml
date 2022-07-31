@@ -5,12 +5,12 @@
 
 <table class="table table-striped table-bordered table-sm">
     <thead>
-        <tr  bg-color="danger" text-color="white">
+        <tr bg-color="danger" text-color="white">
             <th colspan="2">Product Summary</th>
         </tr>
     </thead>
     <tbody>
-        <tr bg-color="danger" text-color="white"><th>Name</th><td>@Model?.Name</td></tr>
+        <tr><th>Name</th><td bg-color="success">@Model?.Name</td></tr>
         <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
         <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
     </tbody>
