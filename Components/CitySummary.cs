@@ -14,11 +14,7 @@ namespace WebApp.Components
 
         public IViewComponentResult Invoke()
         {
-            return View(new CityViewModel
-            {
-                Cities = data.Cities.Count(),
-                Population = data.Cities.Sum(c => c.Population)
-            });
+            return Content("This is a <h3><i>string</i></h3>");
         }
     }
 }
