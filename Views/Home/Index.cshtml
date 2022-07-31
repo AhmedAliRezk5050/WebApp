@@ -1,33 +1,17 @@
 ﻿@model Product
-
 @{
-    Layout = "_Layout";
-    ViewBag.Title = ViewBag.Title ?? "Product Table";
+    Layout = "_SimpleLayout";
 }
 
-@section Header {
- Product Information
- }
-    <tr>
-        <th>Name</th>
-        <td>@Model?.Name</td>
-    </tr>
-    <tr>
-        <th>Price</th>
-        <td>@Model?.Price.ToString("c")</td>
-    </tr>
-    <tr>
-        <th>Category ID</th>
-        <td>@Model?.CategoryId</td>
-    </tr>
-
-    @section Footer {
-    @(((Model?.Price / ViewBag.AveragePrice)* 100).ToString("F2"))% of average price
-}
-
-    @section Summary {
-    <div class="bg-info text-white m-2 p-2">
-        @await Component.InvokeAsync("CitySummary", new {themeName="success"})
-        <vc:page-size />
-    </div>
-}
+<table class="table table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th colspan="2">Product Summary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><th>Name</th><td>@Model?.Name</td></tr>
+        <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
+        <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
+    </tbody>
+</table>
