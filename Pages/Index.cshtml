@@ -1,12 +1,9 @@
 ﻿@page "{id:long?}"
 @model IndexModel
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="bg-primary text-white text-center m-2 p-2">@Model.Product?.Name</div>
-</body>
-</html>
+
+@{
+    ViewBag.Title = $"{@Model.Product?.Name}'s razor page";
+}
+
+<div class="bg-primary text-white text-center m-2 p-2">@Model.Product?.Name</div>
