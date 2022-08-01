@@ -20,6 +20,8 @@ builder.Services.AddSingleton<CitiesData>();
 
 builder.Services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
 
+builder.Services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
+
 var app = builder.Build();
 
 app.UseStaticFiles();
