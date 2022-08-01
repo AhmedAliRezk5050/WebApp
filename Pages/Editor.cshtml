@@ -15,8 +15,8 @@
     <div class="m-2">
         <table class="table table-sm table-striped table-bordered">
             <tbody>
-                <tr><th>Name</th><td>@Model.Product?.Name</td></tr>
-                <tr><th>Price</th><td>@Model.Product?.Price</td></tr>
+                <tr for="Product.Name" />
+                <tr for="Product.Price" format="c" />
             </tbody>
         </table>
         <form method="post">

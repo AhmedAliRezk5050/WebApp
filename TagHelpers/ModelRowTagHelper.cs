@@ -18,7 +18,9 @@ namespace WebApp.TagHelpers
             output.TagMode = TagMode.StartTagAndEndTag;
 
             TagBuilder th = new TagBuilder("th");
-            
+
+            th.InnerHtml.Append(For?.Name.Split(".").Last() ?? String.Empty);
+
             th.InnerHtml.Append(For?.Name ?? String.Empty);
             
             output.Content.AppendHtml(th);
