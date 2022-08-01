@@ -9,9 +9,9 @@
 <table class="table table-striped table-bordered table-sm">
     <tablehead bg-color="danger">Product Summary</tablehead>
     <tbody>
-        <tr><th>Name</th><td highlight="true">@Model?.Name</td></tr>
-        <tr><th>Price</th><td>@Model?.Price.ToString("c")</td></tr>
-        <tr><th>Category ID</th><td>@Model?.CategoryId</td></tr>
+        <tr for="Name" />
+        <tr for="Price" format="c" />
+        <tr for="CategoryId" />
     </tbody>
 </table>
 
