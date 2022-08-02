@@ -20,9 +20,9 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 
-app.MapControllers();
-
-app.MapDefaultControllerRoute();
+app.MapControllerRoute(
+    "forms",
+    "controllers/{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
