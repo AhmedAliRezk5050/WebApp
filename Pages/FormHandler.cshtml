@@ -7,7 +7,7 @@
     <form asp-page="FormHandler" method="post" id="htmlform">
         <div class="mb-3">
             <label>Name</label>
-            <input class="form-control" name="Name"
+            <input class="form-control" 
                    asp-for="Product!.Name" />
         </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
@@ -35,14 +35,14 @@
         {
             Product = await context.Products.FindAsync(id);
 
-            Console.WriteLine($"product is: {Product}");
-
             if(Product == null)
             {
-                return RedirectToPage("NotFound");
+                // another option(custom not found page)
+                //return RedirectToPage("NotFound");
+                return new NotFoundResult();
             }
 
-           return new EmptyResult();
+            return  Page();
         }
 
         public IActionResult OnPost()
