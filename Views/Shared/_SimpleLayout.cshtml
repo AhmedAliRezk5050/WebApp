@@ -14,7 +14,7 @@
         <h6 class="bg-primary text-white m-2 p-2">
             Uncached timestamp: @DateTime.Now.ToLongTimeString()
         </h6>
-        <cache expires-on="@DateTime.Parse("2100-01-01")">
+        <cache expires-sliding="@TimeSpan.FromSeconds(10)">
             <h6 class="bg-primary text-white m-2 p-2">
                 Cached timestamp: @DateTime.Now.ToLongTimeString()
             </h6>
