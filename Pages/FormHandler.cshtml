@@ -8,7 +8,7 @@
         <div class="mb-3">
             <label>Name</label>
             <input class="form-control" name="Name"
-                   value="@Model.Product?.Name" />
+                   asp-for="Product.Name" />
         </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
@@ -31,9 +31,18 @@
 
         public Product? Product { get; set; }
 
-        public async Task OnGetAsync(long id = 1)
+        public async Task<IActionResult> OnGetAsync(long id = 1)
         {
             Product = await context.Products.FindAsync(id);
+
+            Console.WriteLine($"product is: {Product}");
+
+            if(Product == null)
+            {
+                return RedirectToPage("NotFound");
+            }
+
+           return new EmptyResult();
         }
 
         public IActionResult OnPost()
