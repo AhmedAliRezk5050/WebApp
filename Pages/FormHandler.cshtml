@@ -4,7 +4,7 @@
 
 <div class="m-2">
     <h5 class="bg-primary text-white text-center p-2">HTML Form</h5>
-    <form asp-page="FormHandler" method="post">
+    <form asp-page="FormHandler" method="post" id="htmlform">
         <div class="mb-3">
             <label>Name</label>
             <input class="form-control" name="Name"
@@ -12,6 +12,10 @@
         </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
+
+    <button form="htmlform" asp-page="FormHandler" class="btn btn-primary mt-2">
+        Submit (Outside Form)
+    </button>
 </div>
 
 @functions {
