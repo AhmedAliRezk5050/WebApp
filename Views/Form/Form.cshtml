@@ -7,23 +7,23 @@
 <h5 class="bg-primary text-white text-center p-2">HTML Form</h5>
 <form asp-action="submitform" method="post" id="htmlform">
     <div class="mb-3">
-        <label>Id</label>
+        <label asp-for="ProductId"></label>
         <input class="form-control" asp-for="ProductId" />
     </div>
     <div class="mb-3">
-        <label>Name</label>
+        <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
     </div>
     <div class="mb-3">
-        <label>Price</label>
+        <label asp-for="Price"></label>
         <input class="form-control" asp-for="Price" />
     </div>
     <div class="mb-3">
-        <label>Category</label>
+        <label asp-for="Category!.Name">Category</label>
         <input class="form-control" asp-for="Category!.Name" />
     </div>
     <div class="mb-3">
-        <label>Supplier</label>
+        <label asp-for="Supplier!.Name">Supplier</label>
         <input class="form-control" asp-for="Supplier!.Name" />
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
