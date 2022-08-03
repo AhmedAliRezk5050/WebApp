@@ -26,6 +26,11 @@
         <label asp-for="Supplier!.Name">Supplier</label>
         <input class="form-control" asp-for="Supplier!.Name" />
     </div>
+    <select class="form-control mb-3" asp-for="CategoryId">
+        <option value="1">Watersports</option>
+        <option value="2">Soccer</option>
+        <option value="3">Chess</option>
+    </select>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>
 
