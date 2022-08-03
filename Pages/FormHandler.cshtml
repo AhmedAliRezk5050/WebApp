@@ -2,6 +2,7 @@
 @model FormHandlerModel
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Mvc.Rendering;
 
 <div class="m-2">
     <h5 class="bg-primary text-white text-center p-2">HTML Form</h5>
@@ -26,11 +27,9 @@
             <label asp-for="Product!.Supplier!.Name">Supplier</label>
             <input class="form-control" asp-for="Product!.Supplier!.Name" />
         </div>
-        <select class="form-control mb-3" asp-for="Product!.CategoryId">
-            <option value="1">Watersports</option>
-            <option value="2">Soccer</option>
-            <option value="3">Chess</option>
+        <select class="form-control mb-3" asp-for="Product!.CategoryId" asp-items="@((SelectList?)ViewData["categories"])">
         </select>
+        
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
 
@@ -45,9 +44,13 @@
     {
         private DataContext context;
 
+        //public SelectList CategoriesSelectList { get; set; }
+
         public FormHandlerModel(DataContext dbContext)
         {
             context = dbContext;
+
+            //CategoriesSelectList = new SelectList(context.Categories, "CategoryId", "Name");
         }
 
         public Product? Product { get; set; }
@@ -58,6 +61,8 @@
                                    .Include(p => p.Supplier)
                                    .Include(p => p.Category)
                                    .FirstOrDefaultAsync(p => p.ProductId == id);
+        
+            ViewData["categories"] =  new SelectList(context.Categories, "CategoryId", "Name");
 
             if (Product == null)
             {
