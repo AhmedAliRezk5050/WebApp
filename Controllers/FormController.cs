@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApp.Controllers
 {
@@ -15,12 +16,14 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index(long id = 1)
         {
+            ViewBag.Categories = new SelectList(context.Categories, "CategoryId", "Name");
+
             var product = await context.Products
                             .Include(p => p.Category)
                             .Include(p => p.Supplier)
                             .FirstOrDefaultAsync(p => p.ProductId == id);
 
-            return View("Form", null);
+            return View("Form", product);
         }
 
         [HttpPost]
