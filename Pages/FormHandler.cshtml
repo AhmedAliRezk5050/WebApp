@@ -8,34 +8,15 @@
     <h5 class="bg-primary text-white text-center p-2">HTML Form</h5>
     <form asp-page="FormHandler" method="post" id="htmlform">
         <div class="mb-3">
-            <label asp-for="Product!.ProductId"></label>
-            <input class="form-control" asp-for="Product!.ProductId" />
+            <label>Name</label>
+            <input class="form-control" asp-for="Product!.Name" name="name" />
         </div>
         <div class="mb-3">
-            <label asp-for=Product!.Name></label>
-            <input class="form-control" asp-for="Product!.Name" />
+            <label>Price</label>
+            <input class="form-control" asp-for="Product!.Price" name="price" />
         </div>
-        <div class="mb-3">
-            <label asp-for="Product!.Price"></label>
-            <input class="form-control" asp-for="Product!.Price" />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Product!.Category!.Name">Category</label>
-            <input class="form-control" asp-for="Product!.Category!.Name" />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Product!.Supplier!.Name">Supplier</label>
-            <input class="form-control" asp-for="Product!.Supplier!.Name" />
-        </div>
-        <select class="form-control mb-3" asp-for="Product!.CategoryId" asp-items="@((SelectList?)ViewData["categories"])">
-        </select>
-        
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
-
-    <button form="htmlform" asp-page="FormHandler" class="btn btn-primary mt-2">
-        Submit (Outside Form)
-    </button>
 </div>
 
 @functions {
@@ -60,8 +41,8 @@
                                    .Include(p => p.Supplier)
                                    .Include(p => p.Category)
                                    .FirstOrDefaultAsync(p => p.ProductId == id);
-        
-            ViewData["categories"] =  new SelectList(context.Categories, "CategoryId", "Name");
+
+            ViewData["categories"] = new SelectList(context.Categories, "CategoryId", "Name");
 
             if (Product == null)
             {
@@ -73,12 +54,11 @@
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string name, decimal price)
         {
-            foreach (string key in Request.Form.Keys.Where(k => !k.StartsWith("_")))
-            {
-                TempData[key] = string.Join(", ", Request.Form[key]);
-            }
+
+            TempData["name param"] = name;
+            TempData["price param"] = price.ToString();
 
             return RedirectToPage("FormResults");
         }
