@@ -53,7 +53,7 @@ var context = app.Services
                 .ServiceProvider
                 .GetRequiredService<DataContext>();
 
-// temporary disable
+
 SeedData.SeedDatabase(context);
 
 app.Run();
