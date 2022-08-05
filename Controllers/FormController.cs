@@ -15,7 +15,7 @@ namespace WebApp.Controllers
             context = dbContext;
         }
 
-        public async Task<IActionResult> Index(long? id)
+        public async Task<IActionResult> Index([FromQuery] long? id)
         {
             ViewBag.Categories = new SelectList(context.Categories, "CategoryId", "Name");
 
