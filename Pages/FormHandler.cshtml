@@ -15,6 +15,10 @@
             <label>Price</label>
             <input class="form-control" asp-for="Product!.Price" name="price" />
         </div>
+         <div class="mb-3">
+            <label>Category Name</label>
+            <input class="form-control" asp-for="Product!.Category!.Name" />
+        </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
 </div>
@@ -24,42 +28,32 @@
     {
         private DataContext context;
 
-        //public SelectList CategoriesSelectList { get; set; }
-
         public FormHandlerModel(DataContext dbContext)
         {
             context = dbContext;
 
-            //CategoriesSelectList = new SelectList(context.Categories, "CategoryId", "Name");
         }
 
-        public Product? Product { get; set; }
+        [BindProperty]
+        public Product Product { get; set; } = new();
 
-        public async Task<IActionResult> OnGetAsync(long id = 1)
+        [BindProperty(Name = "Product.Category")]
+        public Category Category { get; set; } = new();
+
+        public async Task OnGetAsync(long id = 1)
         {
             Product = await context.Products
-                                   .Include(p => p.Supplier)
                                    .Include(p => p.Category)
-                                   .FirstOrDefaultAsync(p => p.ProductId == id);
-
-            ViewData["categories"] = new SelectList(context.Categories, "CategoryId", "Name");
-
-            if (Product == null)
-            {
-                // another option(custom not found page)
-                //return RedirectToPage("NotFound");
-                return new NotFoundResult();
-            }
-
-            return Page();
+                                   .Include(p => p.Supplier)
+                                   .FirstAsync(p => p.ProductId == id);
         }
 
-        public IActionResult OnPost(string name, decimal price)
+        public IActionResult OnPost()
         {
 
-            TempData["name param"] = name;
-            TempData["price param"] = price.ToString();
+            TempData["product"] = System.Text.Json.JsonSerializer.Serialize(Product);
 
+            TempData["category"] = System.Text.Json.JsonSerializer.Serialize(Category);
 
             return RedirectToPage("FormResults");
         }
