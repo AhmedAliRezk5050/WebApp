@@ -9,15 +9,15 @@
             <form asp-page="Bindings" method="post">
                 <div class="form-group">
                     <label>Value #1</label>
-                    <input class="form-control" name="Data[2]" value="Item 1" />
+                    <input class="form-control" name="Data" value="Item 1" />
                 </div>
                 <div class="form-group">
                     <label>Value #2</label>
-                    <input class="form-control" name="Data[0]" value="Item 2" />
+                    <input class="form-control" name="Data" value="Item 2" />
                 </div>
                 <div class="form-group">
                     <label>Value #3</label>
-                    <input class="form-control" name="Data[1]" value="Item 3" />
+                    <input class="form-control" name="Data" value="Item 3" />
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-secondary" asp-page="Bindings">Reset</a>
@@ -37,6 +37,6 @@
     public class BindingsModel : PageModel
     {
         [BindProperty(Name = "Data")]
-        public string[] Data { get; set; } = Array.Empty<string>();
+        public SortedSet<string> Data { get; set; } = new SortedSet<string>();
     }
 }
