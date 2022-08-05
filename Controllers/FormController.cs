@@ -47,5 +47,12 @@ namespace WebApp.Controllers
         {
             return $"Header: {accept}";
         }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public Product Body([FromBody] Product model)
+        {
+            return model;
+        }
     }
 }
