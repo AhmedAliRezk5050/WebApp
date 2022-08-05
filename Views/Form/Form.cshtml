@@ -14,5 +14,9 @@
         <label asp-for="Price"></label>
         <input class="form-control" asp-for="Price" />
     </div>
+     <div class="mb-3">
+        <label>Category Name</label>
+        <input class="form-control" asp-for="Category!.Name" />
+    </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>

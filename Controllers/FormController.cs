@@ -23,7 +23,6 @@ namespace WebApp.Controllers
                             .Include(p => p.Category)
                             .Include(p => p.Supplier)
                             .FirstOrDefaultAsync(p => id == null || p.ProductId == id);
-
             return View("Form", product);
         }
 
