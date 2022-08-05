@@ -7,18 +7,18 @@
     <div class="row">
         <div class="col">
             <form asp-page="Bindings" method="post">
-                <div class="form-group">
-                    <label>Value #1</label>
-                    <input class="form-control" name="Data[first]" value="Item 1" />
-                </div>
-                <div class="form-group">
-                    <label>Value #2</label>
-                    <input class="form-control" name="Data[second]" value="Item 2" />
-                </div>
-                <div class="form-group">
-                    <label>Value #3</label>
-                    <input class="form-control" name="Data[third]" value="Item 3" />
-                </div>
+                @for (int i = 0; i < 2; i++)
+                {
+                    <div class="mb-3">
+                        <label>#@i</label>
+                        <input class="form-control" name="Data[@i].Name" value="Product-@i" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>#@i</label>
+                        <input class="form-control" name="Data[@i].Price" value="@(100 + i)" />
+                    </div>
+                }
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a class="btn btn-secondary" asp-page="Bindings">Reset</a>
             </form>
@@ -26,11 +26,15 @@
         <div class="col">
             <table class="table table-sm table-striped">
                 <tbody>
-                    @foreach (string key in Model.Data.Keys)
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                    @foreach (Product product in Model.Data)
                     {
                         <tr>
-                            <th>@key</th>
-                            <td>@Model.Data[key]</td>
+                            <td>@product.Name</td>
+                            <td>@product.Price</td>
                         </tr>
                     }
                 </tbody>
@@ -38,11 +42,12 @@
         </div>
     </div>
 </div>
+
 @functions {
     public class BindingsModel : PageModel
     {
         [BindProperty(Name = "Data")]
-        public Dictionary<string, string> Data { get; set; } =
-                                                            new Dictionary<string, string>();
+        public Product[] Data { get; set; } = Array.Empty<Product>();
+
     }
 }
