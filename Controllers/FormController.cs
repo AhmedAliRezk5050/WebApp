@@ -42,5 +42,10 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        public string Header([FromHeader] string accept)
+        {
+            return $"Header: {accept}";
+        }
     }
 }
