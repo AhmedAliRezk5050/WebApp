@@ -4,6 +4,7 @@
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Mvc.Rendering;
 @using Microsoft.AspNetCore.Mvc.ModelBinding
+@using WebApp.Validation
 
 <partial name="_Validation" />
 
@@ -66,45 +67,6 @@
 
         public IActionResult OnPost()
         {
-            if (ModelState.GetValidationState("Product.Price")
-                    == ModelValidationState.Valid
-                &&
-                Product.Price < 1)
-            {
-                ModelState.AddModelError("Product.Price", "Enter a positive price");
-            }
-
-            if (ModelState.GetValidationState("Product.Name")
-                        == ModelValidationState.Valid
-                &&
-                    ModelState.GetValidationState("Product.Price")
-                        == ModelValidationState.Valid
-                && 
-                    Product.Name.ToLower().StartsWith("small")
-                &&  
-                    Product.Price > 100)
-            {
-                ModelState.AddModelError("",
-                "Small products cannot cost more than $100");
-            }
-
-            if (ModelState.GetValidationState("Product.CategoryId")
-                    == ModelValidationState.Valid 
-                 &&
-                !context.Categories.Any(c => c.CategoryId == Product.CategoryId))
-            {
-                ModelState.AddModelError("Product.CategoryId",
-                "Enter an existing category ID");
-            }
-
-            if (ModelState.GetValidationState("Product.SupplierId")
-                    == ModelValidationState.Valid 
-                &&
-            !context.Suppliers.Any(s => s.SupplierId == Product.SupplierId))
-            {
-                ModelState.AddModelError("Product.SupplierId",
-                "Enter an existing supplier ID");
-            }
             if (ModelState.IsValid)
             {
                 TempData["name"] = Product.Name;
@@ -119,6 +81,7 @@
             }
             else
             {
+                ModelState.PromotePropertyErrors(nameof(Product));
                 return Page();
             }
 
