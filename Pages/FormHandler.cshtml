@@ -3,21 +3,43 @@
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+<partial name="_Validation" />
 
 <div class="m-2">
     <h5 class="bg-primary text-white text-center p-2">HTML Form</h5>
     <form asp-page="FormHandler" method="post" id="htmlform">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mb-3">
             <label>Name</label>
-            <input class="form-control" asp-for="Product!.Name" name="name" />
+            <div>
+                <span asp-validation-for="Product!.Name" class="text-danger"></span>
+            </div>
+            <input class="form-control" asp-for="Product!.Name"/>
         </div>
         <div class="mb-3">
             <label>Price</label>
-            <input class="form-control" asp-for="Product!.Price" name="price" />
+            <div>
+                <span asp-validation-for="Product!.Price" class="text-danger"></span>
+            </div>
+            <input class="form-control" asp-for="Product!.Price"/>
         </div>
-         <div class="mb-3">
-            <label>Category Name</label>
-            <input class="form-control" asp-for="Product!.Category!.Name" />
+        <div class="mb-3">
+            <label>CategoryId</label>
+            <div>
+                <span asp-validation-for="Product!.CategoryId" class="text-danger">
+                </span>
+            </div>
+            <input class="form-control" asp-for="Product!.CategoryId" />
+        </div>
+        <div class="mb-3">
+            <label>SupplierId</label>
+            <div>
+                <span asp-validation-for="Product!.SupplierId" class="text-danger">
+                </span>
+            </div>
+            <input class="form-control" asp-for="Product!.SupplierId" />
         </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
@@ -34,22 +56,72 @@
 
         }
 
-        public Product? Product { get; set; }
+        [BindProperty]
+        public Product Product { get; set; } = new();
 
         public async Task OnGetAsync(long id = 1)
         {
-            Product = await context.Products
-                                   .Include(p => p.Category)
-                                   .Include(p => p.Supplier)
-                                   .FirstAsync(p => p.ProductId == id);
+            Product = await context.Products.FirstOrDefaultAsync(p => p.ProductId == id) ?? new();
         }
 
-        public IActionResult OnPost(Product p)
+        public IActionResult OnPost()
         {
+            if (ModelState.GetValidationState("Product.Price")
+                    == ModelValidationState.Valid
+                &&
+                Product.Price < 1)
+            {
+                ModelState.AddModelError("Product.Price", "Enter a positive price");
+            }
 
-            TempData["product"] = System.Text.Json.JsonSerializer.Serialize(p);
+            if (ModelState.GetValidationState("Product.Name")
+                        == ModelValidationState.Valid
+                &&
+                    ModelState.GetValidationState("Product.Price")
+                        == ModelValidationState.Valid
+                && 
+                    Product.Name.ToLower().StartsWith("small")
+                &&  
+                    Product.Price > 100)
+            {
+                ModelState.AddModelError("",
+                "Small products cannot cost more than $100");
+            }
 
-            return RedirectToPage("FormResults");
+            if (ModelState.GetValidationState("Product.CategoryId")
+                    == ModelValidationState.Valid 
+                 &&
+                !context.Categories.Any(c => c.CategoryId == Product.CategoryId))
+            {
+                ModelState.AddModelError("Product.CategoryId",
+                "Enter an existing category ID");
+            }
+
+            if (ModelState.GetValidationState("Product.SupplierId")
+                    == ModelValidationState.Valid 
+                &&
+            !context.Suppliers.Any(s => s.SupplierId == Product.SupplierId))
+            {
+                ModelState.AddModelError("Product.SupplierId",
+                "Enter an existing supplier ID");
+            }
+            if (ModelState.IsValid)
+            {
+                TempData["name"] = Product.Name;
+
+                TempData["price"] = Product.Price.ToString();
+
+                TempData["categoryId"] = Product.CategoryId.ToString();
+
+                TempData["supplierId"] = Product.SupplierId.ToString();
+
+                return RedirectToPage("FormResults");
+            }
+            else
+            {
+                return Page();
+            }
+
         }
     }
 }
