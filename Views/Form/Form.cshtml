@@ -8,6 +8,7 @@
 <partial name="_Validation" />
 
 <form asp-action="submitform" method="post" id="htmlform">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="mb-3">
         <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
