@@ -14,32 +14,32 @@
         <div class="mb-3">
             <label>Name</label>
             <div>
-                <span asp-validation-for="Product!.Name" class="text-danger"></span>
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
             </div>
-            <input class="form-control" asp-for="Product!.Name"/>
+            <input class="form-control" asp-for="Product.Name"/>
         </div>
         <div class="mb-3">
             <label>Price</label>
             <div>
-                <span asp-validation-for="Product!.Price" class="text-danger"></span>
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
-            <input class="form-control" asp-for="Product!.Price"/>
+            <input class="form-control" asp-for="Product.Price"/>
         </div>
         <div class="mb-3">
             <label>CategoryId</label>
             <div>
-                <span asp-validation-for="Product!.CategoryId" class="text-danger">
+                <span asp-validation-for="Product.CategoryId" class="text-danger">
                 </span>
             </div>
-            <input class="form-control" asp-for="Product!.CategoryId" />
+            <input class="form-control" asp-for="Product.CategoryId" />
         </div>
         <div class="mb-3">
             <label>SupplierId</label>
             <div>
-                <span asp-validation-for="Product!.SupplierId" class="text-danger">
+                <span asp-validation-for="Product.SupplierId" class="text-danger">
                 </span>
             </div>
-            <input class="form-control" asp-for="Product!.SupplierId" />
+            <input class="form-control" asp-for="Product.SupplierId" />
         </div>
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
