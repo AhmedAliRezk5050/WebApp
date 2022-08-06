@@ -11,18 +11,22 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="mb-3">
         <label asp-for="Name"></label>
+        <div><span class="text-danger" asp-validation-for="Name"></span></div>
         <input class="form-control" asp-for="Name" />
     </div>
     <div class="mb-3">
         <label asp-for="Price"></label>
+        <div><span class="text-danger" asp-validation-for="Price"></span></div>
         <input class="form-control" asp-for="Price" />
     </div>
     <div class="mb-3">
         <label>CategoryId</label>
+        <div><span class="text-danger" asp-validation-for="CategoryId"></span></div>
         <input class="form-control" asp-for="CategoryId" />
     </div>
     <div class="mb-3">
         <label>SupplierId</label>
+        <div><span class="text-danger" asp-validation-for="SupplierId"></span></div>
         <input class="form-control" asp-for="SupplierId" />
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
