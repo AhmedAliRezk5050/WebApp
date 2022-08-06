@@ -24,15 +24,6 @@ namespace WebApp.Controllers
         public IActionResult SubmitForm(Product product)
         {
             if (
-                (ModelState.GetValidationState(nameof(Product.Price))
-                    == ModelValidationState.Valid)
-                && product.Price <= 0
-                )
-            {
-                ModelState.AddModelError(nameof(Product.Price), "Enter a positive price");
-            }
-
-            if (
                 (ModelState.GetValidationState(nameof(Product.Name))
                         == ModelValidationState.Valid)
                 && 
