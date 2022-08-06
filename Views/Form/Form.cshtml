@@ -1,5 +1,4 @@
 ﻿@model Product
-
 @{
     Layout = "_SimpleLayout";
 }
@@ -14,9 +13,13 @@
         <label asp-for="Price"></label>
         <input class="form-control" asp-for="Price" />
     </div>
-     <div class="mb-3">
-        <label>Category Name</label>
-        <input class="form-control" asp-for="Category!.Name" />
+    <div class="mb-3">
+        <label>CategoryId</label>
+        <input class="form-control" asp-for="CategoryId" />
+    </div>
+    <div class="mb-3">
+        <label>SupplierId</label>
+        <input class="form-control" asp-for="SupplierId" />
     </div>
     <button type="submit" class="btn btn-primary mt-2">Submit</button>
 </form>
