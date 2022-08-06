@@ -33,6 +33,20 @@ namespace WebApp.Controllers
             }
 
             if (
+                (ModelState.GetValidationState(nameof(Product.Name))
+                        == ModelValidationState.Valid)
+                && 
+                    (ModelState.GetValidationState(nameof(Product.Price))
+                                == ModelValidationState.Valid)
+                && 
+                    product.Name.ToLower().StartsWith("small")
+                &&
+                    product.Price > 100)
+            {
+                ModelState.AddModelError("", "Small products cannot cost more than $100");
+            }
+
+            if (
                 (ModelState.GetValidationState(nameof(Product.CategoryId))
                     == ModelValidationState.Valid)
                 &&
