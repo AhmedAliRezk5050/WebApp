@@ -6,9 +6,15 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
-            return View(
-                "Message",
-                "This is the Index action on the Home controller");
+            if(Request.IsHttps)
+            {
+                return View(
+               "Message",
+               "This is the Index action on the Home controller");
+            } 
+
+            return new StatusCodeResult(StatusCodes.Status403Forbidden);
+           
         }
     }
 }
