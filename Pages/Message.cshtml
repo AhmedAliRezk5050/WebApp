@@ -1,6 +1,7 @@
 ﻿@page "/pages/message"
 @model MessageModel
 @using Microsoft.AspNetCore.Mvc.RazorPages
+@using WebApp.Filters
 
 @if (Model.Message is string)
 {
@@ -22,8 +23,10 @@ else if (Model.Message is IDictionary<string, string>)
 @functions {
 
     [RequireHttps]
+    [SimpleCache]
     public class MessageModel : PageModel
     {
-        public object Message { get; set; } = "This is the Message Razor Page";
+        public object Message { get; set; } =
+                $"{DateTime.Now.ToLongTimeString()}: This is the Message Razor Page";
     }
 }
