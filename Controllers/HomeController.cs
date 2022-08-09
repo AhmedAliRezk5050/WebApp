@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Filters;
 
 namespace WebApp.Controllers
 {
-    [RequireHttps]
+    [HttpsOnly]
     public class HomeController : Controller
     {
         public IActionResult Index()
