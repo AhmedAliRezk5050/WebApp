@@ -20,6 +20,8 @@ else if (Model.Message is IDictionary<string, string>)
     </table>
 }
 @functions {
+
+    [RequireHttps]
     public class MessageModel : PageModel
     {
         public object Message { get; set; } = "This is the Message Razor Page";
