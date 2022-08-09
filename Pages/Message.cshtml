@@ -23,10 +23,15 @@ else if (Model.Message is IDictionary<string, string>)
 @functions {
 
     [RequireHttps]
-    [SimpleCache]
+    [ChangePageArgs]
     public class MessageModel : PageModel
     {
         public object Message { get; set; } =
                 $"{DateTime.Now.ToLongTimeString()}: This is the Message Razor Page";
+
+        public void OnGet(string message1, string message2)
+        {
+            Message = $"{message1}, {message2}";
+        }
     }
 }
