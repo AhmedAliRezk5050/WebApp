@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace WebApp.Filters
 {
-    public class ResultDiagnosticsAttribute : Attribute, IAsyncResultFilter
+    public class ResultDiagnosticsAttribute : ResultFilterAttribute
     {
-        public async Task OnResultExecutionAsync(
-                ResultExecutingContext context,
-                ResultExecutionDelegate next)
+        public override async Task OnResultExecutionAsync(
+            ResultExecutingContext context,
+            ResultExecutionDelegate next)
         {
             if (context.HttpContext.Request.Query.ContainsKey("diag"))
             {
