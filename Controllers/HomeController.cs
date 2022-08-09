@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace WebApp.Controllers
 {
     [HttpsOnly]
+    [ResultDiagnostics]
     public class HomeController : Controller
     {
         public IActionResult Index()
