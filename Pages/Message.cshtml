@@ -2,6 +2,7 @@
 @model MessageModel
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using WebApp.Filters
+@using Microsoft.AspNetCore.Mvc.Filters
 
 @if (Model.Message is string)
 {
@@ -23,7 +24,6 @@ else if (Model.Message is IDictionary<string, string>)
 @functions {
 
     [RequireHttps]
-    [ChangePageArgs]
     public class MessageModel : PageModel
     {
         public object Message { get; set; } =
@@ -32,6 +32,15 @@ else if (Model.Message is IDictionary<string, string>)
         public void OnGet(string message1, string message2)
         {
             Message = $"{message1}, {message2}";
+        }
+
+        public override void OnPageHandlerExecuting(
+            PageHandlerExecutingContext context)
+        {
+            if (context.HandlerArguments.ContainsKey("message1"))
+            {
+                context.HandlerArguments["message1"] = "New message";
+            }
         }
     }
 }
