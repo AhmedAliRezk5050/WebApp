@@ -25,9 +25,13 @@ namespace WebApp.Pages
                     && !string.IsNullOrEmpty(product.Category?.Name))
             {
                 DataContext.Categories.Add(product.Category);
+
                 await DataContext.SaveChangesAsync();
+                
                 product.CategoryId = product.Category.CategoryId;
+                
                 ModelState.Clear();
+                
                 TryValidateModel(product);
             }
         }
