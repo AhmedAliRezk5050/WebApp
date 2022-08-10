@@ -69,5 +69,40 @@ namespace WebApp.Controllers
                 "ProductEditor",
                 ViewModelFactory.Create(product, Categories, Suppliers));
         }
+
+        public async Task<IActionResult> Edit(long id)
+        {
+            Product? p = await context.Products.FindAsync(id);
+
+            if (p != null)
+            {
+                ProductViewModel model =
+                ViewModelFactory.Edit(p, Categories, Suppliers);
+            
+                return View("ProductEditor", model);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                product.Category = default;
+                
+                product.Supplier = default;
+                
+                context.Products.Update(product);
+                
+                await context.SaveChangesAsync();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            return View(
+                "ProductEditor",
+                ViewModelFactory.Edit(product, Categories, Suppliers));
+        }
     }
 }
