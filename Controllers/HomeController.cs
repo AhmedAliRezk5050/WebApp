@@ -78,7 +78,7 @@ namespace WebApp.Controllers
             {
                 ProductViewModel model =
                 ViewModelFactory.Edit(p, Categories, Suppliers);
-            
+
                 return View("ProductEditor", model);
             }
 
@@ -91,18 +91,43 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 product.Category = default;
-                
+
                 product.Supplier = default;
-                
+
                 context.Products.Update(product);
-                
+
                 await context.SaveChangesAsync();
-                
+
                 return RedirectToAction(nameof(Index));
             }
             return View(
                 "ProductEditor",
                 ViewModelFactory.Edit(product, Categories, Suppliers));
+        }
+
+        public async Task<IActionResult> Delete(long id)
+        {
+            Product? p = await context.Products.FindAsync(id);
+        
+            if (p != null)
+            {
+                ProductViewModel model = ViewModelFactory.Delete(
+                p, Categories, Suppliers);
+                
+                return View("ProductEditor", model);
+            }
+            
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Product product)
+        {
+            context.Products.Remove(product);
+        
+            await context.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Index));
         }
     }
 }
