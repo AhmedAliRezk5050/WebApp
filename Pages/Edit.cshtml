@@ -1,0 +1,40 @@
+﻿@page "/pages/edit/{id}"
+@model EditModel
+
+<div class="m-2">
+    <partial name="_ProductEditor" model="@Model.ViewModel" />
+</div>
+
+@functions {
+    public class EditModel : EditorPageModel
+    {
+        public EditModel(DataContext dbContext) : base(dbContext) { }
+
+        public async Task OnGetAsync(long id)
+        {
+            Product p = await this.DataContext.Products.FindAsync(id) ?? new Product();
+
+            ViewModel = ViewModelFactory.Edit(p, Categories, Suppliers);
+        }
+
+        public async Task<IActionResult> OnPostAsync([FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                product.Category = default;
+               
+                product.Supplier = default;
+                
+                DataContext.Products.Update(product);
+                
+                await DataContext.SaveChangesAsync();
+                
+                return RedirectToPage(nameof(Index));
+            }
+
+            ViewModel = ViewModelFactory.Edit(product, Categories, Suppliers);
+            
+            return Page();
+        }
+    }
+}
