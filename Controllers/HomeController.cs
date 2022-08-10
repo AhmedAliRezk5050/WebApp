@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebApp.Controllers
 {
-    [ResultDiagnostics]
+    [Message("This is the controller-scoped filter")]
     public class HomeController : Controller
     {
+        [Message("This is the first action-scoped filter")]
+        [Message("This is the second action-scoped filter")]
         public IActionResult Index()
         {
             return View(
