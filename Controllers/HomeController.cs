@@ -34,8 +34,40 @@ namespace WebApp.Controllers
                                         ?? new Product();
 
             ProductViewModel model = ViewModelFactory.Details(p);
-            
+
             return View("ProductEditor", model);
+        }
+
+        public IActionResult Create()
+        {
+            return View(
+                "ProductEditor",
+                ViewModelFactory.Create(new Product(), Categories, Suppliers));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                product.ProductId = default;
+
+                product.Category = default;
+
+                product.Supplier = default;
+
+                context.Products.Add(product);
+
+                await context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            return View(
+                "ProductEditor",
+                ViewModelFactory.Create(product, Categories, Suppliers));
         }
     }
 }
